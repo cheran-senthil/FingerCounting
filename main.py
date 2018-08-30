@@ -9,6 +9,7 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(X, Y)
 
 cap = cv2.VideoCapture(0)
+old_prediction = np.zeros((10))
 
 while True:
     ret, frame = cap.read()
@@ -20,7 +21,10 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    clf.predict([gray.ravel()])
+    new_prediction = clf.predict([gray.ravel()])
+    if np.any(new_prediction != old_prediction):
+        print('Count of Fingers: %d' % np.argmax(new_prediction))
+        old_prediction = new_prediction
 
 cap.release()
 cv2.destroyAllWindows()
