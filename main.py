@@ -1,8 +1,8 @@
-import numpy as np
 import cv2
+import numpy as np
 from sklearn import tree
 
-X = np.load('X.npy').reshape(-1, 64*64)
+X = np.load('X.npy').reshape(-1, 64 * 64)
 Y = np.load('Y.npy')
 
 clf = tree.DecisionTreeClassifier()
